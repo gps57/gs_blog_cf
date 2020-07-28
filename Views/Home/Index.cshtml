@@ -1,0 +1,77 @@
+﻿@model IEnumerable<gs_blog_cf.Models.BlogPost>
+
+<div class="blog-wrapper section-padding-100 clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-9">
+
+        <h3>Last Five Published Blogs</h3><br />
+
+        @foreach(var blogPost in Model)
+        {
+          <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1000ms">
+            <div class="row align-items-center">
+              <div class="col-12 col-md-6">
+                <div class="single-blog-thumbnail">
+                  @*<img src="/Images/3.jpg" alt="">*@
+                  <img class="img-responsive", src="@blogPost.MediaPath" alt="">
+                  <div class="post-date">
+                    <a href="#">@blogPost.Created.Day <span>@blogPost.Created.ToString("MMMM")</span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <!-- Blog Content -->
+                <div class="single-blog-content">
+                  <div class="line"></div>
+                  <a href="#" class="post-tag">Category</a>
+                  <h4>@Html.ActionLink(@blogPost.Title, "Details", "BlogPosts", new { slug = blogPost.Slug }, new { @class = "post-headline" })</h4>                
+                  <p>
+                    @Html.DisplayFor(modelItem => blogPost.Abstract)
+                  </p>
+                  <div class="post-meta">
+                    <p>By <a href="#">Glen Stewart</a></p>
+                    <p>@blogPost.Comments.Count comments</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+     </div>
+    <!-- Sidebar Area -->
+    <div class="col-12 col-md-4 col-lg-3">
+      <div class="post-sidebar-area">
+
+        <!-- Widget Area -->
+        <div class="sidebar-widget-area">
+          <p>
+            <img src="/Images/GlenOnCodingLogoFooter.png" alt="">
+          </p>
+          <p>
+            Come along with me on my journey to becoming a full-stack .Net web developer.
+            If you are considering coding as a profession, perhaps these articles can help you learn a little along your way.
+            - Add a link to my portfolio here -
+          </p>
+        </div>
+
+        <!-- Widget Area -->
+        @if (!Request.IsAuthenticated)
+        {
+          @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn original-btn" })
+          @Html.ActionLink("Register To Comment", "Register", "Account", null, new { @class = "btn original-btn" })
+        }
+
+        @*<div class="sidebar-widget-area">
+      <h5 class="title subscribe-title">Login (not active)</h5>
+      <div class="widget-content">
+        <form action="#" class="newsletterForm">
+          <input type="email" name="email" id="subscribesForm" placeholder="Your e-mail here">
+          <input type="password" name="password" id="loginForm" placeholder="Password">
+          <button type="submit" class="btn original-btn">Login</button>
+        </form>
+      </div>
+    </div>*@
+      </div>
+    </div>
+</div>
