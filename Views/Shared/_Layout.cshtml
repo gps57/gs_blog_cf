@@ -88,13 +88,14 @@
             </div>*@
 
             <!-- Hello User -->
-            @if (Request.IsAuthenticated)
+            <!-- Don't want this here.  It should be in the side columns -->
+            @*@if (Request.IsAuthenticated)
             {
               <div>Hello Display Name.  Great to see you again!</div>
-              @*<div class="subscribe-btn">
+              <div class="subscribe-btn">
                   <a href="#" class="btn subscribe-btn" data-toggle="modal" data-target="#subsModal">Subscribe</a>
-              </div>*@
-            }
+              </div>
+            }*@
             
 
             <!-- Navbar Toggler -->

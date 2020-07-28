@@ -166,6 +166,44 @@
             </form>
           </div>
         </div>
+
+        <!-- ##### Sidebar Area ##### -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <div class="post-sidebar-area">
+            <!-- Could have a search area here -->
+            <!-- Could have a Login/Logout/Register area here -->
+            <!-- Could have an advertisement here -->
+            <!-- Recent Posts Area -->
+            <div class="sidebar-widget-area">
+              <h5 class="title">Five Most Recent Posts</h5>
+              <div class="widget-content">
+
+
+
+                <!-- here starts the repeating list of blogs to loop over and display -->
+                @foreach (var recentPost in Model.RecentPosts)
+                {
+                  <div class="single-blog-post d-flex align-items-center widget-post">
+                    <!-- Post Thumbnail -->
+                    <div class="post-thumbnail">
+                      <img class="img-responsive" , src="@recentPost.MediaPath" alt="">
+                      @*<img src="img/blog-img/lp1.jpg" alt="">*@
+                    </div>
+                    <!-- Post Content -->
+                    <div class="post-content">
+                      <a href="#" class="post-tag">Category</a>
+                      <h4>@Html.ActionLink(@recentPost.Title, "Details", "BlogPosts", new { slug = recentPost.Slug }, new { @class = "post-headline" })</h4>
+                      <div class="post-meta">
+                        <p>@recentPost.Created.Day <span>@recentPost.Created.ToString("MMM yyyy")</span></p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                }
+              </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

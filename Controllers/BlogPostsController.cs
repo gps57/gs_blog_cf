@@ -58,8 +58,8 @@ namespace gs_blog_cf.Controllers
                 return HttpNotFound();
             }
 
-            // TODO: come back to this and get a better list from the db.  This just gets all of them, and we won't want that.
-            detailsPage.RecentPosts = db.BlogPosts.ToList();
+            // TODO: come back to this and make sure the Featured Blog is not in this list.
+            detailsPage.RecentPosts = db.BlogPosts.Where(b => b.Published).OrderByDescending(createdDate => createdDate.Created).Take(5).ToList();
 
             return View(detailsPage);
         }
@@ -178,6 +178,7 @@ namespace gs_blog_cf.Controllers
             return View(blogPost);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: BlogPosts/Delete/5
         public ActionResult Delete(int? id)
         {
