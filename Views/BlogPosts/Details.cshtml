@@ -65,41 +65,8 @@
             <h5 class="title">Comments</h5>
 
             <ol>
-              <!-- Single Comment Area -->
-              <li class="single_comment_area">
-                <!-- Comment Content -->
-                <div class="comment-content d-flex">
-                  <!-- Comment Author -->
-                  <div class="comment-author">
-                    <img src="/Images/b7.jpg" alt="author">
-                  </div>
-                  <!-- Comment Meta -->
-                  <div class="comment-meta">
-                    <a href="#" class="post-date">March 12</a>
-                    <p><a href="#" class="post-author">William James</a></p>
-                    <p>Efficitur lorem sed tempor. Integer aliquet tempor cursus. Nullam vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus, vel volutpat quam tincidunt.</p>
-                    <a href="#" class="comment-reply">Reply</a>
-                  </div>
-                </div>
-                <ol class="children">
-                  <li class="single_comment_area">
-                    <!-- Comment Content -->
-                    <div class="comment-content d-flex">
-                      <!-- Comment Author -->
-                      <div class="comment-author">
-                        <img src="/Images/b7.jpg" alt="author">
-                      </div>
-                      <!-- Comment Meta -->
-                      <div class="comment-meta">
-                        <a href="#" class="post-date">March 12</a>
-                        <p><a href="#" class="post-author">William James</a></p>
-                        <p>Efficitur lorem sed tempor. Integer aliquet tempor cursus. Nullam vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus, vel volutpat quam tincidunt.</p>
-                        <a href="#" class="comment-reply">Reply</a>
-                      </div>
-                    </div>
-                  </li>
-                </ol>
-              </li>
+              @foreach(var comment in Model.FeaturedPost.Comments.OrderByDescending(c => c.Created))
+              {
 
               <!-- Single Comment Area -->
               <li class="single_comment_area">
@@ -111,61 +78,38 @@
                   </div>
                   <!-- Comment Meta -->
                   <div class="comment-meta">
-                    <a href="#" class="post-date">March 12</a>
-                    <p><a href="#" class="post-author">William James</a></p>
-                    <p>Efficitur lorem sed tempor. Integer aliquet tempor cursus. Nullam vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus, vel volutpat quam tincidunt.</p>
-                    <a href="#" class="comment-reply">Reply</a>
+                    <a href="#" class="post-date">@comment.Created.ToString("dd MMM yyyy")</a>
+                    <p><a href="#" class="post-author">@comment.Author.DisplayName</a></p>
+                    <p>@comment.Body</p>
                   </div>
                 </div>
               </li>
+              }
             </ol>
           </div>
 
+          
           <div class="post-a-comment-area mt-70">
-            <h5>Leave a comment</h5>
+            <h5>Leave a comment here</h5>
             <!-- Reply Form -->
-            <form action="#" method="post">
-              <div class="row">
-                <div class="col-12 col-md-6">
-                  <div class="group">
-                    <input type="text" name="name" id="name" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Name</label>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="group">
-                    <input type="email" name="email" id="email" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Email</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="group">
-                    <input type="text" name="subject" id="subject" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Subject</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="group">
-                    <textarea name="message" id="message" required></textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Comment</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  @Html.ActionLink("Comment", "Create", "Comments", null, new { @class = "btn original-btn" })
-                  @*<button type="submit" class="btn original-btn">Comment</button>*@
-                </div>
+            @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+            {
+              @Html.AntiForgeryToken()
+              @Html.Hidden("BlogPostId", Model.FeaturedPost.Id)
+              @Html.Hidden("Slug", Model.FeaturedPost.Slug)
+
+              <div class="group">
+                @Html.TextArea("Body", new { rows = 20, cols = 100 })
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Comment</label>
               </div>
-            </form>
+
+              <button type="submit" class="btn original-btn">Submit Comment</button>
+              @*<input type="submit" value="Submit Comment" class="btn original-btn" />*@
+            }
           </div>
-        </div>
+        </div>  <!-- ##### END Post Content Area ##### -->
 
         <!-- ##### Sidebar Area ##### -->
         <div class="col-12 col-md-4 col-lg-3">

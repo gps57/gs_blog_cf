@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using gs_blog_cf.Models;
+using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 
 namespace gs_blog_cf.Controllers
 {
@@ -49,18 +51,25 @@ namespace gs_blog_cf.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BlogPostId,AuthorId,Body,Created,Updated,UpdatedReason")] Comment comment)
+        public ActionResult Create(string body, int blogPostId, string slug)
         {
-            if (ModelState.IsValid)
+            if(body.IsNullOrWhiteSpace())
             {
-                db.Comments.Add(comment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BlogPosts", new { slug });
             }
 
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", comment.AuthorId);
-            ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title", comment.BlogPostId);
-            return View(comment);
+            var comment = new Comment
+            {
+                Body = body,
+                Created = DateTime.Now,
+                BlogPostId = blogPostId,
+                AuthorId = User.Identity.GetUserId()
+            };
+
+            db.Comments.Add(comment);
+            db.SaveChanges();
+            return RedirectToAction("Details", "BlogPosts", new { slug });
+
         }
 
         // GET: Comments/Edit/5

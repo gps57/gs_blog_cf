@@ -18,6 +18,12 @@ namespace gs_blog_cf.Controllers
             return View(publishedBlogPosts);
         }
 
+        public ActionResult Archive()
+        {
+            var publishedBlogPosts = db.BlogPosts.Where(b => b.Published).OrderByDescending(createdDate => createdDate.Created).ToList();
+            return View(publishedBlogPosts);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
