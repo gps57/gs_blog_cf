@@ -206,6 +206,7 @@
     <Content Include="Images\GlenOnCodingLogoFooter.png" />
     <Content Include="Images\GlenStewart_500x500.jpg" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\person-icon.jpg" />
     <Content Include="Scripts\active.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
