@@ -6,7 +6,7 @@
 
 @if (Request.IsAuthenticated)
 {
-  using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+  using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
   {
     @Html.AntiForgeryToken()
 
@@ -19,17 +19,17 @@
     </ul>
   }
 }
-    else
-    {
-    @Html.ActionLink("Login", "Login", "Account")
-    @Html.ActionLink("Register", "Register", "Account")
+else
+{
+@Html.ActionLink("Login", "Login", "Account")
+@Html.ActionLink("Register", "Register", "Account")
 
-    @*<ul class="nav navbar-nav navbar-right">
-      @Html.ActionLink("Register To Comment", "Register", "Account", null, new { @class = "btn original-btn" })
-        @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn original-btn" })
+@*<ul class="nav navbar-nav navbar-right">
+  @Html.ActionLink("Register To Comment", "Register", "Account", null, new { @class = "btn original-btn" })
+    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn original-btn" })
 
 
-      <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-      <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>*@
-    }
+  <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+  <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+</ul>*@
+}
