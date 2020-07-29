@@ -1,8 +1,12 @@
 ﻿@model gs_blog_cf.Models.Comment
 
 @{
-    ViewBag.Title = "Create";
+  ViewBag.Title = "Create";
 }
+
+@*I'm not sure there's anyway to get here.  My comments are created from the blog details page.  I don't have any user way
+to get to this screen.*@
+
 
 <div class="container">
   <div class="row">
@@ -69,7 +73,8 @@
 
           <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-              <input type="submit" value="Create" class="btn btn-default" />
+              <input type="submit" value="Create" class="btn btn-primary btn-sm mr-2" />
+              @*@Html.ActionLink("Cancel", "Details", "BlogPosts", new { slug = Model.BlogPost.Slug }, new { @class = "btn btn-light btn-sm" })*@
             </div>
           </div>
         </div>
@@ -81,5 +86,5 @@
 
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/bundles/jqueryval")
 }
