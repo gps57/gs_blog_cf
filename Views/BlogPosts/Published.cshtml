@@ -4,14 +4,14 @@
 @model IPagedList<gs_blog_cf.Models.BlogPost>
 
 @{
-    ViewBag.Title = "Index";
+  ViewBag.Title = "Published Blogs";
 }
 
 <div class="container">
   <div class="row">
     <div class="col-12">
       <hr />
-      <h2>Full List of Blogs</h2>
+      <h2>Full List of Published Blogs</h2>
       <p>
         @if (User.IsInRole("Admin"))
         {
@@ -30,18 +30,6 @@
           <th>
             @Html.DisplayName("Title")
           </th>
-          <th>
-            @Html.DisplayName("Slug")
-          </th>
-          @*<th>
-            @Html.DisplayNameFor(model => model.Body)
-          </th>*@
-          <th>
-            @Html.DisplayName("MediaPath")
-          </th>
-          <th>
-            @Html.DisplayName("Published?")
-          </th>
           <th></th>
         </tr>
 
@@ -57,34 +45,21 @@
               @*@Html.DisplayFor(modelItem => item.Updated)*@
             </td>
             <td>
-              @Html.DisplayFor(modelItem => item.Title)
+              @*@Html.DisplayFor(modelItem => item.Title)*@
+              @Html.ActionLink(item.Title, "Details", new { slug = item.Slug })
             </td>
-            <td>
-              @Html.DisplayFor(modelItem => item.Slug)
-            </td>
-            @*<td>
-              @Html.Raw(item.Body)
-            </td>*@
-            <td>
-              @Html.DisplayFor(modelItem => item.MediaPath)
-            </td>
-            <td>
-              @Html.DisplayFor(modelItem => item.Published)
-            </td>
-            <td>
-              @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-              @Html.ActionLink("Details", "Details", new { slug = item.Slug }) |
-              @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            
           </tr>
         }
 
       </table>
       Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-      @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+      @Html.PagedListPager(Model, page => Url.Action("Published", new { page, searchStr=ViewBag.Search }))
     </div>
   </div>
 </div>
+
+
 
 
 

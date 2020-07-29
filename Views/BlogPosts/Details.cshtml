@@ -1,4 +1,5 @@
 ﻿@model gs_blog_cf.ViewModels.BlogPostsDetailsVM
+@using Microsoft.AspNet.Identity
 
 
   <div class="single-blog-wrapper section-padding-0-100">
@@ -67,27 +68,32 @@
             <ol>
               @foreach(var comment in Model.FeaturedPost.Comments.OrderByDescending(c => c.Created))
               {
+                <!-- Single Comment Area -->
+                <li class="single_comment_area">
+                  <!-- Comment Content -->
+                  <div class="comment-content d-flex">
+                    <!-- Comment Author -->
+                    <div class="comment-author">
+                      <img src="~/Images/person-icon.jpg" alt="author">
+                    </div>
+                    <!-- Comment Meta -->
+                    <div class="comment-meta">
+                      <a href="#" class="post-date">@comment.Created.ToString("dd MMM yyyy")</a>
+                      <p><a href="#" class="post-author">@comment.Author.DisplayName</a></p>
+                      <p id="comment-@comment.Id">@comment.Body</p>
+                    </div>
+                  </div>
 
-              <!-- Single Comment Area -->
-              <li class="single_comment_area">
-                <!-- Comment Content -->
-                <div class="comment-content d-flex">
-                  <!-- Comment Author -->
-                  <div class="comment-author">
-                    <img src="~/Images/person-icon.jpg" alt="author">
-                  </div>
-                  <!-- Comment Meta -->
-                  <div class="comment-meta">
-                    <a href="#" class="post-date">@comment.Created.ToString("dd MMM yyyy")</a>
-                    <p><a href="#" class="post-author">@comment.Author.DisplayName</a></p>
-                    <p>@comment.Body</p>
-                  </div>
-                </div>
-              </li>
+                  @if(User.IsInRole("Admin") || User.IsInRole("Moderator") || User.Identity.GetUserId() == comment.AuthorId)
+                  {
+                    @Html.ActionLink("Edit Comment", "Edit", "Comments", new { id = comment.Id }, new { @class = "btn btn-warning mr-1" })
+                    @Html.ActionLink("Delete Comment", "Delete", "Comments", new { id = comment.Id }, new { @class = "btn btn-danger" })
+                  }
+                  <hr />
+                </li>
               }
             </ol>
           </div>
-
           
           <div class="post-a-comment-area mt-70">
             <h5>Leave a comment here</h5>

@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using gs_blog_cf.Helpers;
 using gs_blog_cf.Models;
 using gs_blog_cf.ViewModels;
+using PagedList;
+using PagedList.Mvc;
 
 namespace gs_blog_cf.Controllers
 {
@@ -18,9 +20,55 @@ namespace gs_blog_cf.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchStr)
         {
-            return View(db.BlogPosts.ToList());
+            ViewBag.Search = searchStr;
+            var blogList = IndexSearch(searchStr);
+
+            int pageSize = 10; // Specifies the number of posts per page
+            int pageNumber = (page ?? 1); // ?? null coalescing operator - if a page is given, use it, otherwise, use 1
+
+            var model = blogList.ToPagedList(pageNumber, pageSize);
+
+            //var model = db.BlogPosts.OrderByDescending(b => b.Created).ToPagedList(pageNumber, pageSize);
+            return View(model);
+        }
+
+        // GET: Published Blogs
+        public ActionResult Published(int? page, string searchStr)
+        {
+            ViewBag.Search = searchStr;
+            var blogList = IndexSearch(searchStr);
+
+            int pageSize = 10; // Specifies the number of posts per page
+            int pageNumber = (page ?? 1); // ?? null coalescing operator - if a page is given, use it, otherwise, use 1
+
+            var model = blogList.Where(b => b.Published).ToPagedList(pageNumber, pageSize);
+
+            //var model = db.BlogPosts.OrderByDescending(b => b.Created).ToPagedList(pageNumber, pageSize);
+            return View(model);
+        }
+
+        public IQueryable<BlogPost> IndexSearch(string searchStr)
+        {
+            IQueryable<BlogPost> result = null;
+            if(searchStr != null)
+            {
+                result = db.BlogPosts.AsQueryable();
+                result = result.Where(b => b.Title.Contains(searchStr) ||
+                                           b.Body.Contains(searchStr) ||
+                                           b.Comments.Any(c => c.Body.Contains(searchStr) ||
+                                           c.Author.FirstName.Contains(searchStr) ||
+                                           c.Author.LastName.Contains(searchStr) ||
+                                           c.Author.DisplayName.Contains(searchStr) ||
+                                           c.Author.Email.Contains(searchStr)));
+            }
+            else
+            {
+                result = db.BlogPosts.AsQueryable();
+            }
+
+            return result.OrderByDescending(p => p.Created);
         }
 
         // GET: BlogPosts/Details/5

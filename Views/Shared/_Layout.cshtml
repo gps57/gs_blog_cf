@@ -7,16 +7,18 @@
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   @*The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags*@ 
+  @*The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags*@
 
-   @*Title*@ 
+  @*Title*@
   <title>Glen On Coding</title>
 
-   @*Favicon*@ 
+  @*Favicon*@
   <link rel="icon" href="Images/favicon.ico">
 
-   @*Style CSS*@ 
+  @*Style CSS*@
   <link href="~/Content/style.css" rel="stylesheet" />
+  <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css">
+  
 
 </head>
 
@@ -116,10 +118,12 @@
                   <li>
                     @Html.ActionLink("Home", "Index", "Home")
                   </li>
-                  @if (Request.IsAuthenticated)
+
+                  @*@if (Request.IsAuthenticated)*@
+                  @if (User.IsInRole("Admin"))
                   {
                     <li>
-                      <a href="#">Pages</a>
+                      <a href="#">Admin</a>
                       <ul class="dropdown">
 
                         <li>@Html.ActionLink("Blogs", "Index", "BlogPosts")</li>
@@ -156,18 +160,21 @@
                       <li><a href="#">Catagory 1</a></li>
                     </ul>
                   </li>
-                  <li>@Html.ActionLink("Archives", "Archive", "Home")</li>
+                  @*<li>@Html.ActionLink("Archives", "Archive", "Home")</li>*@
+                  <li>@Html.ActionLink("Archives", "Published", "BlogPosts")</li>
                   <li><a href="about-us.html">About Me</a></li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <!-- I don't think I want emails from people reading my blog.-->
+                  @*<li><a href="contact.html">Contact</a></li>*@
                 </ul>
 
                 <!-- Search Form  -->
                 <div id="search-wrapper">
-                  <form action="#">
-                    <input type="text" id="search" placeholder="Search something...">
+                  @using(Html.BeginForm("Published", "BlogPosts", FormMethod.Get))
+                  {
+                    <input id="search" name="searchStr" type="text" placeholder="Search something..." />
                     <div id="close-icon"></div>
-                    <input class="d-none" type="submit" value="">
-                  </form>
+                    <input class="d-none" type="submit" value="" />
+                  }
                 </div>
               </div>
               <!-- Nav End -->
