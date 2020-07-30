@@ -49,24 +49,24 @@ namespace gs_blog_cf.Controllers
             {
                 try
                 {
-                    var body = "<p>Email From: <bold>{0}</bold>({1})</p><p>Message:</p><p>{2}</p>";
+                    var body = "<p>Email From: <bold>{0}</bold>({1})</p><p>Subject: {2}</p><p>Message:</p><p>{3}</p>";
                     var from = "MyPortfolio<example@email.com>";
-                    model.Body = "This is a message from your blog site.  The name and the email of the contacting person is above.";
-
                     var sendTo = ConfigurationManager.AppSettings["emailto"];
 
                     var email = new MailMessage(from, sendTo)
                     {
                         Subject = "Blog Contact Message",
                         //Body = "A test string for the body of the email.",
-                        Body = string.Format(body, model.FromName, model.FromEmail, model.Body),
+                        Body = string.Format(body, model.FromName, model.FromEmail, model.Subject, model.Body),
                         IsBodyHtml = true
                     };
 
                     var svc = new EmailService();
                     await svc.SendAsync(email);
 
-                    return View(new EmailModel());
+                    // After they send the email, I take them to my full list of published blogs.
+                    // Another idea would be to take them back to where they were when they click the contact menu item.
+                    return RedirectToAction("Published", "BlogPosts");
                 }
                 catch (Exception ex)
                 {

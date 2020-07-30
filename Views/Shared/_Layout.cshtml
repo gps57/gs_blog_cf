@@ -153,7 +153,7 @@
                     </ul>
                   </li>
                   <li>@Html.ActionLink("Archives", "Published", "BlogPosts")</li>
-                  <li>@Html.ActionLink("About", "About")</li>
+                  <li>@Html.ActionLink("About", "About", "Home")</li>
                   <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
 
@@ -197,36 +197,74 @@
             </div>
 
             @*Menu*@
-            <div class="classy-menu">
+          <div class="classy-menu">
 
-              @*close btn*@
-              <div class="classycloseIcon">
-                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-              </div>
-
-              @*Nav Start*@
-              <div class="classynav">
-                <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Lifestyle</a></li>
-                  <li><a href="#">travel</a></li>
-                  <li><a href="#">Music</a></li>
-                  <li><a href="#">Contact</a></li>
-                </ul>
-              </div>
-              @*Nav End*@
+            @*close btn*@
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
             </div>
+
+            @*Nav Start*@
+            <div class="classynav">
+              <ul>
+                <li>
+                  @Html.ActionLink("Home", "Index", "Home")
+                </li>
+
+                @*@if (Request.IsAuthenticated)*@
+                @if (User.IsInRole("Admin"))
+                {
+                  <li>
+                    <a href="#">Admin</a>
+                    <ul class="dropdown">
+                      <li>@Html.ActionLink("Blogs", "Index", "BlogPosts")</li>
+                      <li>@Html.ActionLink("Create Blog", "Create", "BlogPosts")</li>
+                    </ul>
+                  </li>
+                }
+                @* Hide Category menu items (class="d-none") until I can implement categories feature *@
+                <li class="d-none">
+                  <a href="#">Category</a>
+                  <ul class="dropdown">
+                    <li><a href="#">C#</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                    <li class="d-none">
+                      <a href="#">Category 1</a>
+                      <ul class="dropdown">
+                        <li><a href="#">Category 2</a></li>
+                        <li><a href="#">Category 2</a></li>
+                        <li>
+                          <a href="#">Category 2</a>
+                          <ul class="dropdown">
+                            <li><a href="#">Category 3</a></li>
+                            <li><a href="#">Category 3</a></li>
+                            <li><a href="#">Category 3</a></li>
+                            <li><a href="#">Category 3</a></li>
+                            <li><a href="#">Category 3</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="#">Category 2</a></li>
+                        <li><a href="#">Category 2</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Bootstrap</a></li>
+                    <li><a href="#">Stack</a></li>
+                  </ul>
+                </li>
+                <li>@Html.ActionLink("Archives", "Published", "BlogPosts")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+              </ul>
+            </div>
+            @*Nav End*@
+          </div>
           </nav>
         </div>
 
         @*Footer Social Area*@
-        <div class="footer-social-area mt-30">
-          <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+        <div class="footer-social-area mt-30 mb-3">
           <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
           <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-          <a href="#" data-toggle="tooltip" data-placement="top" title="Dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-          <a href="#" data-toggle="tooltip" data-placement="top" title="Behance"><i class="fa fa-behance" aria-hidden="true"></i></a>
           <a href="#" data-toggle="tooltip" data-placement="top" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -234,9 +272,12 @@
   </div>
 
   @*Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.*@
+<div class="my-3">
   <img src="/Images/GlenOnCodingLogoFooter.png" alt=""><br />
   Copyright &copy;
-  <script>document.write(new Date().getFullYear());</script> All rights reserved <br />
+
+  <script>document.write(new Date().getFullYear());</script> All rights reserved
+</div>
   This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.</a> Customized by Glen P Stewart
   @*Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.*@
 

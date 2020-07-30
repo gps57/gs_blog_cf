@@ -1,47 +1,75 @@
 ﻿@model gs_blog_cf.Models.EmailModel
 
-@using (Html.BeginForm())
-{
-  @Html.AntiForgeryToken()
-  <h4>Send me a message.</h4>
-  <hr />
-  @Html.ValidationSummary("", new { @class = "text-danger" })
+  <section class="contact-area section-padding-100">
+    <div class="container">
+      <div class="row justify-content-center">
+        <!-- Contact Form Area -->
+        <div class="col-12 col-md-10 col-lg-9">
+          <div class="contact-form">
+            <h4 class="mb-5">Get in Touch</h4>
 
-  <div class="form-group">
-    @Html.LabelFor(m => m.FromName, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-      @Html.TextBoxFor(m => m.FromName, new { @class = "form-control" })
-      @Html.ValidationMessageFor(m => m.FromName)
-    </div>
-  </div>
+            <!-- Contact Form -->
+            @using (@Html.BeginForm())
+            {
+              @Html.AntiForgeryToken()
+              @Html.ValidationSummary("", new { @class = "text-danger" })
 
-  <div class="form-group">
-    @Html.LabelFor(m => m.FromEmail, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-      @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control", placeholder = "example@email.com" })
-      @Html.ValidationMessageFor(m => m.FromEmail)
-    </div>
-  </div>
+              <div class="row">
+                <!-- Name input field -->
+                <div class="col-12 col-md-6">
+                  <div class="group">
+                    @Html.TextBoxFor(m => m.FromName)
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    @Html.ValidationMessageFor(m => m.FromName)
+                    @Html.LabelFor(m => m.FromName)
 
-  <div class="form-group">
-    @Html.LabelFor(m => m.Subject, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-      @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Enter subject" })
-      @Html.ValidationMessageFor(m => m.Subject)
-    </div>
-  </div>
+                  </div>
+                </div>
 
-  <div class="form-group">
-    @Html.LabelFor(m => m.Body, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-      @Html.TextBoxFor(m => m.Body, new { @class = "form-control", placeholder = "MessageBody" })
-      @Html.ValidationMessageFor(m => m.Body)
-    </div>
-  </div>
+                <!-- Email input field -->
+                <div class="col-12 col-md-6">
+                  <div class="group">
+                    @Html.TextBoxFor(m => m.FromEmail)
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    @Html.ValidationMessageFor(m => m.FromEmail)
+                    @Html.LabelFor(m => m.FromEmail)
+                  </div>
+                </div>
 
-  <div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-      <input type="submit" class="btn btn-primary" value="Send" />
+                <!-- Subject input field -->
+                <div class="col-12">
+                  <div class="group">
+                    @Html.TextBoxFor(m => m.Subject)
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    @Html.ValidationMessageFor(m => m.Subject)
+                    @Html.LabelFor(m => m.Subject)
+                  </div>
+                </div>
+
+                <!-- Message body input field -->
+                 <div class="col-12">
+                   <div class="group">
+                     @Html.TextAreaFor(m => m.Body)
+                     <span class="highlight"></span>
+                     <span class="bar"></span>
+                     @Html.ValidationMessageFor(m => m.Body)
+                     @Html.LabelFor(m => m.Body)
+                   </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="group">
+                    <button type="submit" class="btn original-btn">Send Message</button>
+                  </div>
+                </div>
+
+              </div>
+            }
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-}
+  </section>
