@@ -188,6 +188,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -419,6 +420,7 @@
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Home\Archive.cshtml" />
     <Content Include="Views\BlogPosts\Published.cshtml" />
+    <Content Include="Private.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
