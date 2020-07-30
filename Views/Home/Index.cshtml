@@ -54,25 +54,6 @@
             - Add a link to my portfolio here -
           </p>
         </div>
-
-        <!-- Widget Area -->
-
-        @if (!Request.IsAuthenticated)
-        {
-          @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn original-btn" })
-          @Html.ActionLink("Register To Comment", "Register", "Account", null, new { @class = "btn original-btn" })
-        }
-
-        @*<div class="sidebar-widget-area">
-      <h5 class="title subscribe-title">Login (not active)</h5>
-      <div class="widget-content">
-        <form action="#" class="newsletterForm">
-          <input type="email" name="email" id="subscribesForm" placeholder="Your e-mail here">
-          <input type="password" name="password" id="loginForm" placeholder="Password">
-          <button type="submit" class="btn original-btn">Login</button>
-        </form>
-      </div>
-    </div>*@
       </div>
     </div>
 </div>

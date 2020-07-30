@@ -4,60 +4,69 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
+      <p>
+        @Html.ActionLink("Create New", "Create")
+      </p>
+      <table class="table">
+        <tr>
+          <th>
             @Html.DisplayNameFor(model => model.Author.FirstName)
-        </th>
-        <th>
+          </th>
+          <th>
             @Html.DisplayNameFor(model => model.BlogPost.Title)
-        </th>
-        <th>
+          </th>
+          <th>
             @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
+          </th>
+          <th>
             @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th>
+          </th>
+          <th>
             @Html.DisplayNameFor(model => model.Updated)
-        </th>
-        <th>
+          </th>
+          <th>
             @Html.DisplayNameFor(model => model.UpdatedReason)
-        </th>
-        <th></th>
-    </tr>
+          </th>
+          <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlogPost.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedReason)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+          <tr>
+            <td>
+              @Html.DisplayFor(modelItem => item.Author.FirstName)
+            </td>
+            <td>
+              @Html.DisplayFor(modelItem => item.BlogPost.Title)
+            </td>
+            <td>
+              @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+              @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+              @Html.DisplayFor(modelItem => item.Updated)
+            </td>
+            <td>
+              @Html.DisplayFor(modelItem => item.UpdatedReason)
+            </td>
+            <td>
+              @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+              @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+              @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+          </tr>
+        }
 
-</table>
+      </table>
+    </div>
+  </div>
+</div>
+
+
