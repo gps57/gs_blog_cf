@@ -50,7 +50,7 @@ namespace gs_blog_cf.Controllers
                 try
                 {
                     var body = "<p>Email From: <bold>{0}</bold>({1})</p><p>Message:</p><p>{2}</p>";
-                    var from = "MyPortfolio<example@email.com";
+                    var from = "MyPortfolio<example@email.com>";
                     model.Body = "This is a message from your blog site.  The name and the email of the contacting person is above.";
 
                     var sendTo = ConfigurationManager.AppSettings["emailto"];
@@ -58,8 +58,8 @@ namespace gs_blog_cf.Controllers
                     var email = new MailMessage(from, sendTo)
                     {
                         Subject = "Blog Contact Message",
-                        Body = "A test string for the body of the email.",
-                        //Body = string.Format(body, model.FromName, model.FromEmail, model.Body),
+                        //Body = "A test string for the body of the email.",
+                        Body = string.Format(body, model.FromName, model.FromEmail, model.Body),
                         IsBodyHtml = true
                     };
 
