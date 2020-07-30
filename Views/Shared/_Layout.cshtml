@@ -70,12 +70,6 @@
                   </div>
                 </li>
               </ul>
-      
-                @*@if (!Request.IsAuthenticated)
-      {
-        @Html.ActionLink("Login", "Login", "Account")
-        @Html.ActionLink("Register", "Register", "Account")
-      }*@
             </div>
           </div>
         </div>
@@ -99,23 +93,6 @@
         <div class="container">
           <!-- Classy Menu -->
           <nav class="classy-navbar justify-content-end">
-
-            <!-- Login btn (using original subscribe button styles from template) -->
-            @*<div class="subscribe-btn">
-              @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn subscribe-btn" })
-            </div>*@
-
-            <!-- Hello User -->
-            <!-- Don't want this here.  It should be in the side columns -->
-            @*@if (Request.IsAuthenticated)
-            {
-              <div>Hello Display Name.  Great to see you again!</div>
-              <div class="subscribe-btn">
-                  <a href="#" class="btn subscribe-btn" data-toggle="modal" data-target="#subsModal">Subscribe</a>
-              </div>
-            }*@
-            
-
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
               <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -141,44 +118,43 @@
                     <li>
                       <a href="#">Admin</a>
                       <ul class="dropdown">
-
                         <li>@Html.ActionLink("Blogs", "Index", "BlogPosts")</li>
                         <li>@Html.ActionLink("Create Blog", "Create", "BlogPosts")</li>
                       </ul>
                     </li>
                   }
-
-                  <li>
-                    <a href="#">Catagory</a>
+                  @* Hide Category menu items (class="d-none") until I can implement categories feature *@
+                  <li class="d-none">
+                    <a href="#">Category</a>
                     <ul class="dropdown">
-                      <li><a href="#">Catagory 1</a></li>
-                      <li><a href="#">Catagory 1</a></li>
+                      <li><a href="#">Category 1</a></li>
+                      <li><a href="#">Category 1</a></li>
                       <li>
-                        <a href="#">Catagory 1</a>
+                        <a href="#">Category 1</a>
                         <ul class="dropdown">
-                          <li><a href="#">Catagory 2</a></li>
-                          <li><a href="#">Catagory 2</a></li>
+                          <li><a href="#">Category 2</a></li>
+                          <li><a href="#">Category 2</a></li>
                           <li>
-                            <a href="#">Catagory 2</a>
+                            <a href="#">Category 2</a>
                             <ul class="dropdown">
-                              <li><a href="#">Catagory 3</a></li>
-                              <li><a href="#">Catagory 3</a></li>
-                              <li><a href="#">Catagory 3</a></li>
-                              <li><a href="#">Catagory 3</a></li>
-                              <li><a href="#">Catagory 3</a></li>
+                              <li><a href="#">Category 3</a></li>
+                              <li><a href="#">Category 3</a></li>
+                              <li><a href="#">Category 3</a></li>
+                              <li><a href="#">Category 3</a></li>
+                              <li><a href="#">Category 3</a></li>
                             </ul>
                           </li>
-                          <li><a href="#">Catagory 2</a></li>
-                          <li><a href="#">Catagory 2</a></li>
+                          <li><a href="#">Category 2</a></li>
+                          <li><a href="#">Category 2</a></li>
                         </ul>
                       </li>
-                      <li><a href="#">Catagory 1</a></li>
-                      <li><a href="#">Catagory 1</a></li>
+                      <li><a href="#">Category 1</a></li>
+                      <li><a href="#">Category 1</a></li>
                     </ul>
                   </li>
-                  @*<li>@Html.ActionLink("Archives", "Archive", "Home")</li>*@
                   <li>@Html.ActionLink("Archives", "Published", "BlogPosts")</li>
                   <li>@Html.ActionLink("About", "About")</li>
+
                   <!-- I don't think I want emails from people reading my blog.-->
                   @*<li><a href="contact.html">Contact</a></li>*@
                 </ul>
