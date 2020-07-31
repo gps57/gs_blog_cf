@@ -421,6 +421,7 @@
     <Content Include="Views\Home\Archive.cshtml" />
     <Content Include="Views\BlogPosts\Published.cshtml" />
     <Content Include="Private.config" />
+    <None Include="Properties\PublishProfiles\GlenOnCodingBlog - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
