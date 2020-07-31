@@ -99,6 +99,7 @@ namespace gs_blog_cf.Controllers
         {
             if (ModelState.IsValid)
             {
+                comment.Updated = DateTime.Now;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
