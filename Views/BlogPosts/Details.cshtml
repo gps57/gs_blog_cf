@@ -61,7 +61,7 @@
               <p>
                 I am a full stack web developer with a strong skill set in the .NET/C# technologies.
               </p> <br />
-              <a class="btn original-btn" target="_blank" href="https://gs-portfolio-cf.netlify.app">View my Portfolio</a>              
+              <a class="btn original-btn" target="_blank" href="https://gs-portfolio-cf.netlify.app">View my Portfolio</a>
             </div>
           </div>
 
@@ -70,7 +70,7 @@
             <h5 class="title">Comments</h5>
 
             <ol>
-              @foreach(var comment in Model.FeaturedPost.Comments.OrderByDescending(c => c.Created))
+              @foreach (var comment in Model.FeaturedPost.Comments.OrderByDescending(c => c.Created))
               {
                 <!-- Single Comment Area -->
                 <li class="single_comment_area">
@@ -88,7 +88,7 @@
                     </div>
                   </div>
 
-                  @if(User.IsInRole("Admin") || User.IsInRole("Moderator") || User.Identity.GetUserId() == comment.AuthorId)
+                  @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.Identity.GetUserId() == comment.AuthorId)
                   {
                     @Html.ActionLink("Edit Comment", "Edit", "Comments", new { id = comment.Id }, new { @class = "btn btn-warning mr-1" })
                     @Html.ActionLink("Delete Comment", "Delete", "Comments", new { id = comment.Id }, new { @class = "btn btn-danger" })
@@ -98,27 +98,30 @@
               }
             </ol>
           </div>
-          
-          <div class="post-a-comment-area mt-70">
-            <h5>Leave a comment here</h5>
-            <!-- Reply Form -->
-            @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
-            {
-              @Html.AntiForgeryToken()
-              @Html.Hidden("BlogPostId", Model.FeaturedPost.Id)
-              @Html.Hidden("Slug", Model.FeaturedPost.Slug)
 
-              <div class="group">
-                @Html.TextArea("Body", new { rows = 20, cols = 100 })
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label>Comment</label>
-              </div>
+          @if (Request.IsAuthenticated)
+          {
+            <div class="post-a-comment-area mt-70">
+              <h5>Leave a comment here</h5>
+              <!-- Reply Form -->
+              @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+              {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("BlogPostId", Model.FeaturedPost.Id)
+                @Html.Hidden("Slug", Model.FeaturedPost.Slug)
 
-              <button type="submit" class="btn original-btn">Submit Comment</button>
-              @*<input type="submit" value="Submit Comment" class="btn original-btn" />*@
-            }
-          </div>
+                <div class="group">
+                  @Html.TextArea("Body", new { rows = 20, cols = 100 })
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label>Comment</label>
+                </div>
+
+                <button type="submit" class="btn original-btn">Submit Comment</button>
+                @*<input type="submit" value="Submit Comment" class="btn original-btn" />*@
+              }
+            </div>
+          }
         </div>  <!-- ##### END Post Content Area ##### -->
 
         <!-- ##### Sidebar Area ##### -->
