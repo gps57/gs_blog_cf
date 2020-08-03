@@ -39,9 +39,13 @@
                 <p>By <a href="#">Glen Stewart</a></p>
                 <p>@Model.FeaturedPost.Comments.Count comments</p>
               </div>
+              @if (User.IsInRole("Admin"))
+              {
+                @Html.ActionLink("Edit Post", "Edit", "BlogPosts", new { id = Model.FeaturedPost.Id }, new { @class = "btn btn-primary btn-sm mb-2" })
+              }
               <p>
                 @Html.Raw(Model.FeaturedPost.Body)
-              </p>              
+              </p>
             </div>
           </div>
 
